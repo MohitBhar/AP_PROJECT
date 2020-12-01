@@ -13,7 +13,7 @@ public class StopDueToHit {
 	private RunningGame runningGame;
 	private subScene1 s1;
 	private RunGame runGame;
-	private Text scoreText;
+	private Text scoreText=new Text();
 	public StopDueToHit(RunningGame runningGame,RunGame runGame, subScene1 s1)
 	{
 		this.runningGame=runningGame;
@@ -57,6 +57,11 @@ public class StopDueToHit {
 			public void handle(ActionEvent a)
 			{
 				s1.moveScene2();
+				runningGame.b1.setYPosition(runningGame.b1.getYPosition()+35);
+				runningGame.b1.c1.setLayoutY(runningGame.b1.getYPosition());
+				setScore1();
+				runningGame.animationTimer.start();
+				
 			}
 		});
 		b2.setOnAction(new EventHandler<ActionEvent>() {
@@ -76,6 +81,11 @@ public class StopDueToHit {
 		});
 		
 	}
+	public void setScore1()
+	{
+		scoreText.setText("");
+	}
+	
 	public void setScore2()
 	{
 		scoreText.setText(Integer.toString(runningGame.score));

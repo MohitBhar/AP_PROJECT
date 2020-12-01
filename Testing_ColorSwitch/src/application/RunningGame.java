@@ -41,7 +41,7 @@ public class RunningGame {
 	private subScene1 s1;
 	private subScene1 s2;
 	private RunningGame runningGame=this;
-	private Ball b1;
+	public Ball b1;
 	private ArrayList<Obstacle> obstacles=new ArrayList<Obstacle>();
 	private ArrayList<star> stars=new ArrayList<star>();
 	private ArrayList<ColorChanger> colorChangers=new ArrayList<ColorChanger>();
@@ -49,7 +49,7 @@ public class RunningGame {
 	private Text scoreText;
 	private boolean keyPressed;
 	private boolean firstPress=false;
-	private boolean ishit=false;
+	private boolean ishit;
 	public RunningGame(RunGame rGame)
 	{
 		this.runGame=rGame;
@@ -67,19 +67,9 @@ public class RunningGame {
 		anchorPane.getChildren().add(s1);
 		s2=new subScene1("/application/Resources/YellowPanel2.png");
 		anchorPane.getChildren().add(s2);
-		//ishit=true;
 		moveBall();
-		hitScene();
 		
 		
-	}
-	public void hitScene()
-	{
-		if(ishit)
-		{
-			s2.moveScene1();
-			stopDueToHit=new StopDueToHit(runningGame, runGame, s2);
-		}
 	}
 	public void createObstacle()
 	{
@@ -87,38 +77,18 @@ public class RunningGame {
 		Group g1=o1.createObstacle();
 		obstacles.add(o1);
 		anchorPane.getChildren().add(g1);
-		RotateTransition rTrans = new RotateTransition(Duration.millis(3000),g1);
-		rTrans.setByAngle(-360);
-        rTrans.setCycleCount(Animation.INDEFINITE);
-        rTrans.setInterpolator(Interpolator.LINEAR);
-        rTrans.play();
         Obstacle o2=new Obstacle(400,500,"2");
         Group g2=o2.createObstacle();
         obstacles.add(o2);
         anchorPane.getChildren().add(g2);
-		RotateTransition rTrans1 = new RotateTransition(Duration.millis(3000),g2);
-		rTrans1.setByAngle(-360);
-        rTrans1.setCycleCount(Animation.INDEFINITE);
-        rTrans1.setInterpolator(Interpolator.LINEAR);
-        rTrans1.play();
         Obstacle o3=new Obstacle(400,-200,"3");
 		Group g3=o3.createObstacle();
 		obstacles.add(o3);
 		anchorPane.getChildren().add(g3);
-		RotateTransition rTrans2 = new RotateTransition(Duration.millis(3000),g3);
-		rTrans2.setByAngle(-360);
-        rTrans2.setCycleCount(Animation.INDEFINITE);
-        rTrans2.setInterpolator(Interpolator.LINEAR);
-        rTrans2.play();
         Obstacle o4=new Obstacle(400,-500,"4");
         Group g4=o4.createObstacle();
         obstacles.add(o4);
         anchorPane.getChildren().add(g4);
-		RotateTransition rTrans3 = new RotateTransition(Duration.millis(3000),g4);
-		rTrans3.setByAngle(-360);
-        rTrans3.setCycleCount(Animation.INDEFINITE);
-        rTrans3.setInterpolator(Interpolator.LINEAR);
-        rTrans3.play();
     
 				
 	}
@@ -214,11 +184,23 @@ public class RunningGame {
 								}
 							}
 					}
+					
 					for(Obstacle o1:obstacles)
 					{
-						o1.checkCollision(b1);
+						Arc test=o1.checkCollision(b1);
+						if(test!=null)
+						{
+							if(!test.getStroke().toString().contentEquals(b1.c1.getFill().toString()))
+							{
+								ishit=true;
+								hit();
+								s2.moveScene1();
+								animationTimer.stop();
+							}
+						}
+						
 					}
-					
+										
 				if(b1.getYPosition()<350)
 					{
 						fun2();
@@ -230,6 +212,15 @@ public class RunningGame {
 		};
 		animationTimer.start();
 	
+	}
+	public void hit()
+	{
+		if(ishit)
+		{
+			stopDueToHit=new StopDueToHit(runningGame, runGame, s2);
+			stopDueToHit.setScore2();
+			animationTimer.stop();
+		}
 	}
 	public void fun2()
 	{

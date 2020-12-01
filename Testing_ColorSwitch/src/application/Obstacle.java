@@ -1,11 +1,18 @@
 package application;
 
 import java.util.ArrayList;
+
+import javafx.animation.Animation;
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.scene.Group;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
+import javafx.util.Duration;
 
 public class Obstacle {
 	// TO DEFINE RADIUS FIELD
@@ -36,6 +43,12 @@ public class Obstacle {
 		a1.setStrokeWidth(10);		
 		a1.setType(ArcType.OPEN);
 		a1.setStroke(Color.MEDIUMPURPLE);
+		Timeline arcAnimation = new Timeline(
+	            new KeyFrame(Duration.ZERO, new KeyValue(a1.startAngleProperty(), a1.getStartAngle(), Interpolator.LINEAR)),
+	            new KeyFrame(Duration.seconds(3), new KeyValue(a1.startAngleProperty(), a1.getStartAngle() - 360, Interpolator.LINEAR))
+	        );
+	        arcAnimation.setCycleCount(Animation.INDEFINITE);
+	        arcAnimation.play();
 		arcList.add(a1);
 		a2=new Arc();
 		a2.setCenterX(xPosition); 
@@ -48,6 +61,13 @@ public class Obstacle {
 		a2.setStrokeWidth(10);
 		a2.setType(ArcType.OPEN);
 		a2.setStroke(Color.DEEPPINK);
+		Timeline arcAnimation1 = new Timeline(
+	            new KeyFrame(Duration.ZERO, new KeyValue(a2.startAngleProperty(), a2.getStartAngle(), Interpolator.LINEAR)),
+	            new KeyFrame(Duration.seconds(3), new KeyValue(a2.startAngleProperty(), a2.getStartAngle() - 360, Interpolator.LINEAR))
+	        );
+	        arcAnimation1.setCycleCount(Animation.INDEFINITE);
+	        arcAnimation1.play();
+		
 		arcList.add(a2);
 		a3=new Arc();
 		a3.setCenterX(xPosition); 
@@ -61,18 +81,33 @@ public class Obstacle {
 		a3.setType(ArcType.OPEN);
 		a3.setStroke(Color.YELLOW);
 		arcList.add(a3);
+		Timeline arcAnimation2 = new Timeline(
+	            new KeyFrame(Duration.ZERO, new KeyValue(a3.startAngleProperty(), a3.getStartAngle(), Interpolator.LINEAR)),
+	            new KeyFrame(Duration.seconds(3), new KeyValue(a3.startAngleProperty(), a3.getStartAngle() - 360, Interpolator.LINEAR))
+	        );
+	        arcAnimation2.setCycleCount(Animation.INDEFINITE);
+	        arcAnimation2.play();
+	
 		a4=new Arc();
 		a4.setCenterX(xPosition); 
 		a4.setCenterY(yPosition); 
 		a4.setRadiusX(90); 
 		a4.setRadiusY(90); 
 		a4.setStartAngle(270); 
-		a4.setFill(null);
 		a4.setLength(90); 
+		a4.setFill(null);
 		a4.setStrokeWidth(10);
 		a4.setType(ArcType.OPEN);
 		a4.setStroke(Color.TURQUOISE);
 		arcList.add(a4);
+		Timeline arcAnimation3 = new Timeline(
+	            new KeyFrame(Duration.ZERO, new KeyValue(a4.startAngleProperty(), a4.getStartAngle(), Interpolator.LINEAR)),
+	            new KeyFrame(Duration.seconds(3), new KeyValue(a4.startAngleProperty(), a4.getStartAngle() - 360, Interpolator.LINEAR))
+	        );
+	        arcAnimation3.setCycleCount(Animation.INDEFINITE);
+	        arcAnimation3.play();
+	
+	
 		this.g1=new Group(a1,a2,a3,a4);
 		return g1;
 	}
@@ -108,122 +143,26 @@ public class Obstacle {
 	{
 		return this.g1;
 	}
-	public boolean checkCollision(Ball b1) {
-		boolean a= false;
-		if(!b1.c1.getFill().toString().equals(a1.getStroke().toString())){
-			if(isCollison(b1)) {
-//				System.out.println("t1----------------");
-
-			}
+	public Arc checkCollision(Ball b1) {
+		if(a1.getBoundsInParent().intersects(b1.c1.getBoundsInParent()) && isCollison(b1))
+		{
+			return a1;
 		}
-		else {
-			if(isCollison(b1)) {
-				System.out.println("perfect t1");
-				return true;
-			}
+		else if(b1.c1.getBoundsInParent().intersects(a2.getBoundsInParent()) && isCollison(b1))
+		{
+			return a2;
 			
 		}
-//		else {
-//			a=true;
-//		}
-		if(!b1.c1.getFill().toString().equals(a2.getStroke().toString())){
-			if(isCollison(b1)) {
-//				System.out.println("t2----------------");
-			}
+		else if(b1.c1.getBoundsInParent().intersects(a3.getBoundsInParent()) && isCollison(b1))
+		{
+			return a3;
+			
 		}
-		else {
-			if(isCollison(b1)) {
-				System.out.println("perfect t2");
-				return true;
-			}
+		else if(b1.c1.getBoundsInParent().intersects(a4.getBoundsInParent()) && isCollison(b1))
+		{
+			return a4;
+			
 		}
-		if(!b1.c1.getFill().toString().equals(a3.getStroke().toString())){
-			if(isCollison(b1)) {
-//				System.out.println("t3----------------");
-			}
-		}
-		else {
-			if(isCollison(b1)) {
-				System.out.println("perfect t3");
-				return true;
-			}
-		}
-		if(!b1.c1.getFill().toString().equals(a4.getStroke().toString())){
-			if(isCollison(b1)) {
-//				System.out.println("t4----------------");
-			}
-		}
-		else {
-			if(isCollison(b1)) {
-				System.out.println("perfect t4");
-				return true;
-			}
-		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-//		
-//		boolean a=false; for multiple collisons
-//		System.out.println("ball "+b1.c1.getFill().toString());
-//		System.out.println("a1 "+a1.getStroke().toString());
-//		System.out.println("a2 "+a2.getStroke().toString());
-//		System.out.println("a3 "+a3.getStroke().toString());
-//		System.out.println("a4 "+a4.getStroke().toString());
-//		
-		
-//			if(b1.c1.getFill().toString().equals(a1.getStroke().toString())) {
-//		System.out.println("1-----------"+b1.c1.getFill().toString()+":"+a1.getStroke().toString());
-//		return true;
-//	}
-//	else if(b1.c1.getFill().toString().equals(a2.getStroke().toString())) {
-//		System.out.println("2-----------"+b1.c1.getFill().toString()+":"+a2.getStroke().toString());
-//		return true;
-//	}
-//	else if(b1.c1.getFill().toString().equals(a3.getStroke().toString())) {
-//		System.out.println("3-----------"+b1.c1.getFill().toString()+":"+a3.getStroke().toString());
-//		return true;
-//	}
-//	else if(b1.c1.getFill().toString().equals(a4.getStroke().toString())) {
-//		System.out.println("4-----------"+b1.c1.getFill().toString()+":"+a4.getStroke().toString());
-//		return true;
-//	}
-//			System.out.println("TRial1: "+b1.getColor().toString()+":"+a1.getStroke().toString());
-//			if(b1.getColor().toString().equals(a1.getStroke().toString())) {
-//				System.out.println("1-----------");
-//				return true;
-//			}
-//		}
-//		if(b1.c1.getBoundsInParent().intersects(a2.getBoundsInParent())){
-//			System.out.println("TRial2: "+b1.getColor().toString()+":"+a2.getStroke().toString());
-//			if(b1.getColor().toString().equals(a2.getStroke().toString())) {
-//				System.out.println("2-----------");
-//				return true;
-//			}
-//		}
-//		if(b1.c1.getBoundsInParent().intersects(a3.getBoundsInParent())){
-//			System.out.println("TRial3: "+b1.getColor().toString()+":"+a3.getStroke().toString());
-//			if(b1.getColor().toString().equals(a3.getStroke().toString())) {
-//				System.out.println("3-----------");
-//				return true;
-//			}
-//		}
-//		if(b1.c1.getBoundsInParent().intersects(a4.getBoundsInParent())){
-//			System.out.println("TRial4: "+b1.getColor().toString()+":"+a4.getStroke().toString());
-//			if(b1.getColor().toString().equals(a4.getStroke().toString())) {
-//				System.out.println("1-----------");
-//				return true;
-//			}
-//		}
-		return false;
+		return null;
 	}
 }
