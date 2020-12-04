@@ -78,7 +78,7 @@ public class RunningGame {
 		obstacles.add(o1);
 		anchorPane.getChildren().add(g1);
         Obstacle o2=new Obstacle(400,500,"2");
-        Group g2=o2.createObstacle();
+        Group g2=o2.createObstacle1();
         obstacles.add(o2);
         anchorPane.getChildren().add(g2);
         Obstacle o3=new Obstacle(400,-200,"3");
@@ -86,7 +86,7 @@ public class RunningGame {
 		obstacles.add(o3);
 		anchorPane.getChildren().add(g3);
         Obstacle o4=new Obstacle(400,-500,"4");
-        Group g4=o4.createObstacle();
+        Group g4=o4.createObstacle1();
         obstacles.add(o4);
         anchorPane.getChildren().add(g4);
     
@@ -177,7 +177,7 @@ public class RunningGame {
 					{
 							if(x.getYPosition()>650)
 							{
-								x.setYPosition(x.getYPosition()-700);
+								x.setYPosition(x.getYPosition()-1400);
 								for(Arc y:x.arcList)
 								{
 									y.setCenterY(x.getYPosition());
