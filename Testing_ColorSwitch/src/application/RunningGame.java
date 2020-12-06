@@ -1,12 +1,15 @@
 package application;
 
 
+import java.time.Year;
 import java.util.ArrayList;
 
 
 import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
+import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
+import javafx.animation.PathTransition;
 import javafx.animation.RotateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -75,7 +78,7 @@ public class RunningGame {
 	}
 	public void createObstacle()
 	{
-		Obstacle3 o1=new Obstacle3(400,200,"1");
+		Obstacle4 o1=new Obstacle4(400,200-500+90,"1");
 		Group g1=o1.createObstacle();
 		obstacles.add(o1);
 		anchorPane.getChildren().add(g1);
@@ -193,6 +196,20 @@ public class RunningGame {
 									}
 									continue;
 								}
+								if(x instanceof Obstacle3) {
+//									
+									x.setYPosition(x.getYPosition()-1400);
+									for(Circle y:x.circleList)
+									{
+										y.setCenterY(y.getCenterY()-1400);
+									}
+									for(Arc y:x.arcList)
+									{
+										y.setCenterY(x.getYPosition());
+//									}	y.setPivotY(x.getYPosition());		
+									}
+									continue;
+								}
 								x.setYPosition(x.getYPosition()-1400);
 								
 								for(Arc y:x.arcList)
@@ -276,6 +293,91 @@ public class RunningGame {
 					}
 					continue;
 				}
+				if(x instanceof Obstacle4) {
+					System.out.println("-----------------");
+					
+					x.setYPosition(x.getYPosition()+5);
+					System.out.println(x.circleList.size()+"circle size");
+					System.out.println(x.arcList.size()+"arc size");
+					
+					for(Circle y:x.circleList)
+					{
+						y.setCenterY(y.getCenterY()+5);
+					}
+//					for(Arc y:x.arcList)
+//					{
+//						y.setCenterY(y.getCenterY()+5);
+//					}
+					ArrayList<PathTransition> pathTransitions=((Obstacle4) x).pathList;
+					System.out.println(pathTransitions.size()+"path size");
+					PathTransition trans0=pathTransitions.get(0);
+					Duration duration_1=trans0.getCycleDuration();
+					double cycle_time=duration_1.toSeconds();
+					Duration duration_11=duration_1.divide(2);
+					
+//					Duration duration22;
+					Duration duration_2=trans0.getCurrentTime();
+					double total_time=duration_2.toSeconds();
+					int n=(int) (total_time/cycle_time);
+					boolean b=((total_time-(cycle_time*n))-(cycle_time/2))>0;
+					
+					for(int i=0;i<x.arcList.size();i++) {
+						
+						Double d=x.circleList.get(0).getCenterX();
+						PathTransition trans=pathTransitions.get(i);
+//						Duration duration=trans.getDuration();
+						Duration duration1=trans.getCycleDuration();
+//						double cycle_time=duration1.toSeconds();
+						Duration duration11=duration1.divide(2);
+//						
+						Duration duration22;
+						Duration duration2=trans.getCurrentTime();
+//						double total_time=duration2.toSeconds();
+//						int n=(int) (total_time/cycle_time);
+//						boolean b=((total_time-(cycle_time*n))-(cycle_time/2))>0;
+//						Double d1=x.circleList.get(0).getCenterX();
+						if(1==0) {
+							System.out.println("********************true------------------"+n);
+							duration22=duration2.add(duration11);
+						}
+						else
+						{
+							System.out.println("+++++++++++++++++++++++++++++");
+							duration22=duration2;
+						}
+						
+						
+//						trans.setAutoReverse(true);
+//						trans.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+//						trans.g
+//						Duration duration3=trans.getCycleDuration();
+						
+						trans.stop();
+						
+//						trans.stop();
+						Arc arc=x.arcList.get(i);
+						arc.setCenterY(arc.getCenterY()+5);
+						trans.setPath(arc);
+						
+//						trans.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+//						// Let the animation run forever
+//						trans.setCycleCount(FadeTransition.INDEFINITE);
+//						// Reverse direction on alternating cycles
+//						trans.setAutoReverse(true);
+//						// Play the Animation
+//						trans.play();
+						trans.playFrom(duration22);
+						
+						System.out.println("path set");
+					}
+//					for(PathTransition y:((Obstacle4) x).pathList)
+//					{
+//						y.setPath(arg0);
+//						y.setCenterY(y.getCenterY()+5);
+//					}
+					continue;
+				}
+				
 				x.setYPosition(x.getYPosition()+5);
 				for(Arc y:x.arcList)
 				{

@@ -22,7 +22,9 @@ public abstract class ObstacleAbstract {
 	protected Group g1;
 	Circle c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15,c16;
 	Rotate r1,r2,r3,r4,r5,r6,r7,r8,r9,r10,r11,r12,r13,r14,r15,r16;
-	
+	int r=500;
+	int l=70;
+	int l1=40;
 	float a=70;
 //	private double xPosition;
 //	private double yPosition;
