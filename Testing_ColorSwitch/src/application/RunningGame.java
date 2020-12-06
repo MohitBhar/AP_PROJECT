@@ -79,7 +79,7 @@ public class RunningGame {
 		Group g1=o1.createObstacle();
 		obstacles.add(o1);
 		anchorPane.getChildren().add(g1);
-        Obstacle3 o2=new Obstacle3(400,500,"2");
+        Obstacle o2=new Obstacle(400,500,"2");
         Group g2=o2.createObstacle();
         obstacles.add(o2);
         anchorPane.getChildren().add(g2);
@@ -235,8 +235,8 @@ public class RunningGame {
 		if(ishit)
 		{
 			stopDueToHit=new StopDueToHit(runningGame, runGame, s2);
-			stopDueToHit.setScore2();
 			animationTimer.stop();
+			stopDueToHit.setScore2();
 		}
 	}
 	public void fun2()

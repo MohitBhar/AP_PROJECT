@@ -57,7 +57,7 @@ public class StopDueToHit {
 			public void handle(ActionEvent a)
 			{
 				s1.moveScene2();
-				runningGame.b1.setYPosition(runningGame.b1.getYPosition()+35);
+				runningGame.b1.setYPosition(runningGame.b1.getYPosition()+45);
 				runningGame.b1.c1.setLayoutY(runningGame.b1.getYPosition());
 				setScore1();
 				runningGame.animationTimer.start();
@@ -67,8 +67,8 @@ public class StopDueToHit {
 		b2.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent a)
-			{
-				
+			{	runningGame.stage.close();
+				runningGame=new RunningGame(runGame);
 			}
 		});
 		b3.setOnAction(new EventHandler<ActionEvent>() {
