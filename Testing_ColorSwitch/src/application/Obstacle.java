@@ -14,15 +14,15 @@ import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
 import javafx.util.Duration;
 
-public class Obstacle {
+public class Obstacle extends ObstacleAbstract {
 	// TO DEFINE RADIUS FIELD
-	private Group g1;
-	private double xPosition;
-	private double yPosition;
-	public ImageView iView1;
-	public String nameString;
-	private Arc a1,a2,a3,a4;
-	public ArrayList<Arc> arcList=new ArrayList<Arc>();
+//	private Group g1;
+//	private double xPosition;
+//	private double yPosition;
+//	public ImageView iView1;
+//	public String nameString;
+//	private Arc a1,a2,a3,a4;
+//	public ArrayList<Arc> arcList=new ArrayList<Arc>();
 
 	public Obstacle(float x, float y,String name)
 	{

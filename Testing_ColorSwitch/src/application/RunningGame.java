@@ -24,10 +24,12 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Arc;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -42,7 +44,7 @@ public class RunningGame {
 	private subScene1 s2;
 	private RunningGame runningGame=this;
 	public Ball b1;
-	private ArrayList<Obstacle> obstacles=new ArrayList<Obstacle>();
+	private ArrayList<ObstacleAbstract> obstacles=new ArrayList<ObstacleAbstract>();
 	private ArrayList<star> stars=new ArrayList<star>();
 	private ArrayList<ColorChanger> colorChangers=new ArrayList<ColorChanger>();
 	public int score=0;
@@ -73,20 +75,20 @@ public class RunningGame {
 	}
 	public void createObstacle()
 	{
-		Obstacle o1=new Obstacle(400,200,"1");
+		Obstacle3 o1=new Obstacle3(400,200,"1");
 		Group g1=o1.createObstacle();
 		obstacles.add(o1);
 		anchorPane.getChildren().add(g1);
-        Obstacle o2=new Obstacle(400,500,"2");
-        Group g2=o2.createObstacle1();
+        Obstacle3 o2=new Obstacle3(400,500,"2");
+        Group g2=o2.createObstacle();
         obstacles.add(o2);
         anchorPane.getChildren().add(g2);
         Obstacle o3=new Obstacle(400,-200,"3");
 		Group g3=o3.createObstacle();
 		obstacles.add(o3);
 		anchorPane.getChildren().add(g3);
-        Obstacle o4=new Obstacle(400,-500,"4");
-        Group g4=o4.createObstacle1();
+        Obstacle2 o4=new Obstacle2(400,-500,"4");
+        Group g4=o4.createObstacle();
         obstacles.add(o4);
         anchorPane.getChildren().add(g4);
     
@@ -173,11 +175,26 @@ public class RunningGame {
 							//stopDueToHit.setScore2();
 						}
 					}
-					for(Obstacle x:obstacles)
-					{
+					for(ObstacleAbstract x:obstacles)
+					{		
+							
 							if(x.getYPosition()>650)
 							{
+								if(x instanceof Obstacle3) {
+//									
+									x.setYPosition(x.getYPosition()-1400);
+									for(Circle y:x.circleList)
+									{
+										y.setCenterY(y.getCenterY()-1400);
+									}
+									for(Rotate y:x.rotateList)
+									{
+										y.setPivotY(x.getYPosition());		
+									}
+									continue;
+								}
 								x.setYPosition(x.getYPosition()-1400);
+								
 								for(Arc y:x.arcList)
 								{
 									y.setCenterY(x.getYPosition());
@@ -185,7 +202,7 @@ public class RunningGame {
 							}
 					}
 					
-					for(Obstacle o1:obstacles)
+					for(ObstacleAbstract o1:obstacles)
 					{
 						Arc test=o1.checkCollision(b1);
 						if(test!=null)
@@ -238,13 +255,33 @@ public class RunningGame {
 				x.iView1.setLayoutY(x.getYPosition());
 			
 			}
-			for(Obstacle x:obstacles)
+			for(ObstacleAbstract x:obstacles)
 			{	
+				
+				if(x instanceof Obstacle3) {
+//					System.out.println("-----------------");
+					
+					x.setYPosition(x.getYPosition()+5);
+					for(Circle y:x.circleList)
+					{
+						y.setCenterY(y.getCenterY()+5);
+					}
+					for(Rotate y:x.rotateList)
+					{
+//						if(x.getYPosition()>0 ) {
+						y.setPivotY(x.getYPosition());
+//						}
+						
+						
+					}
+					continue;
+				}
 				x.setYPosition(x.getYPosition()+5);
 				for(Arc y:x.arcList)
 				{
 					y.setCenterY(x.getYPosition());
 				}
+				
 			}
 		}
 	
@@ -368,14 +405,6 @@ public class RunningGame {
 		scoreText.setLayoutY(160);
 		scoreText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 35));
 		anchorPane.getChildren().add(scoreText);
-//		t1.setOnMousePressed(new EventHandler<MouseEvent>() {
-//			
-//			public void handle(MouseEvent a)
-//			{
-//				test++;
-//				t1.setText(Integer.toString(test));
-//			}
-//		});
 	}
 	public void setScore()
 	{
