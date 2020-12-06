@@ -67,7 +67,7 @@ public class StopDueToHit {
 		b2.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent a)
-			{	runningGame.stage.close();
+			{	//runningGame.stage.close();
 				runningGame=new RunningGame(runGame);
 			}
 		});

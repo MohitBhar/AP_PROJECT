@@ -252,8 +252,8 @@ public class RunningGame {
 		if(ishit)
 		{
 			stopDueToHit=new StopDueToHit(runningGame, runGame, s2);
-			animationTimer.stop();
 			stopDueToHit.setScore2();
+			animationTimer.stop();
 		}
 	}
 	public void fun2()
