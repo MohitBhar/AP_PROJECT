@@ -3,8 +3,6 @@ package application;
 
 import java.time.Year;
 import java.util.ArrayList;
-
-
 import javafx.animation.Animation;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
@@ -53,6 +51,7 @@ public class RunningGame {
 	public int score=0;
 	private Text scoreText;
 	private boolean keyPressed;
+	private boolean keyPressedP;
 	private boolean firstPress=false;
 	private boolean ishit;
 	public RunningGame(RunGame rGame)
@@ -82,7 +81,7 @@ public class RunningGame {
 		Group g1=o1.createObstacle();
 		obstacles.add(o1);
 		anchorPane.getChildren().add(g1);
-        Obstacle o2=new Obstacle(400,500,"2");
+        Obstacle3 o2=new Obstacle3(400,500,"2");
         Group g2=o2.createObstacle();
         obstacles.add(o2);
         anchorPane.getChildren().add(g2);
@@ -141,6 +140,7 @@ public class RunningGame {
 		score();
 		pause();
 		functionKey();
+		//key2();
 	}
 	public void moveBall()
 	{
@@ -218,7 +218,7 @@ public class RunningGame {
 								}
 							}
 					}
-					
+					outScreen();
 					for(ObstacleAbstract o1:obstacles)
 					{
 						Arc test=o1.checkCollision(b1);
@@ -246,6 +246,16 @@ public class RunningGame {
 		};
 		animationTimer.start();
 	
+	}
+	public void outScreen()
+	{
+		if(b1.getYPosition()>=702)
+		{
+			stopDueToHit=new StopDueToHit(runningGame, runGame, s2);
+			stopDueToHit.setScore2();
+			animationTimer.stop();
+			s2.moveScene1();
+		}
 	}
 	public void hit()
 	{
@@ -294,7 +304,7 @@ public class RunningGame {
 					continue;
 				}
 				if(x instanceof Obstacle4) {
-					System.out.println("-----------------");
+					//System.out.println("-----------------");
 					
 					x.setYPosition(x.getYPosition()+5);
 					System.out.println(x.circleList.size()+"circle size");
@@ -309,7 +319,7 @@ public class RunningGame {
 //						y.setCenterY(y.getCenterY()+5);
 //					}
 					ArrayList<PathTransition> pathTransitions=((Obstacle4) x).pathList;
-					System.out.println(pathTransitions.size()+"path size");
+					//System.out.println(pathTransitions.size()+"path size");
 					PathTransition trans0=pathTransitions.get(0);
 					Duration duration_1=trans0.getCycleDuration();
 					double cycle_time=duration_1.toSeconds();
@@ -337,12 +347,12 @@ public class RunningGame {
 //						boolean b=((total_time-(cycle_time*n))-(cycle_time/2))>0;
 //						Double d1=x.circleList.get(0).getCenterX();
 						if(1==0) {
-							System.out.println("********************true------------------"+n);
+							//System.out.println("********************true------------------"+n);
 							duration22=duration2.add(duration11);
 						}
 						else
 						{
-							System.out.println("+++++++++++++++++++++++++++++");
+							//System.out.println("+++++++++++++++++++++++++++++");
 							duration22=duration2;
 						}
 						
@@ -368,7 +378,7 @@ public class RunningGame {
 //						trans.play();
 						trans.playFrom(duration22);
 						
-						System.out.println("path set");
+						//System.out.println("path set");
 					}
 //					for(PathTransition y:((Obstacle4) x).pathList)
 //					{
@@ -425,7 +435,9 @@ public class RunningGame {
 				
 			}
 		});
+				
 }
+	
 	public void background()
 	{
 		BackgroundFill bFill=new BackgroundFill(Color.web("#292929"),CornerRadii.EMPTY,Insets.EMPTY);

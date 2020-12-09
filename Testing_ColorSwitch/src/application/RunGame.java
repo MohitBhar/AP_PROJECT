@@ -57,7 +57,7 @@ public class RunGame {
 		backGround();
 		logo();
 		buttons();
-//		music();
+		music();
 		stage.getIcons().add(new Image("/application/Resources/titlelogo.png"));
 	}
 	public void buttons()
