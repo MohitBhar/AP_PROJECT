@@ -40,7 +40,7 @@ public class RunningGame {
 	public Stage stage;
 	private Scene scene;
 	public AnimationTimer animationTimer;
-	public StopDueToHit stopDueToHit;
+	private StopDueToHit stopDueToHit;
 	private subScene1 s1;
 	private subScene1 s2;
 	private RunningGame runningGame=this;
@@ -62,7 +62,6 @@ public class RunningGame {
 		stage=new Stage();
 		stage.setScene(scene);
 		display();
-		stopDueToHit=new StopDueToHit(runningGame, runGame, s1);
 		stage.getIcons().add(new Image("/application/Resources/titlelogo.png"));
 		if(s==null)
 		{
