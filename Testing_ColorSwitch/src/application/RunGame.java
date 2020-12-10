@@ -136,6 +136,11 @@ public class RunGame {
 		s1.addImage("/application/Resources/YellowPanel1.png",165,150 );
 		s3.addImage("/application/Resources/yellowpanel.png",540,150);
 		s2.addImage("/application/Resources/PurplePanel.png",150,150);
+		button b2=new button("/application/Resources/yellow2.png","/application/Resources/yellow.png");
+		s1.aPane.getChildren().add(b2);
+		b2.setLayoutX(500);
+		b2.setLayoutY(400);
+		
 		
 		
 	}

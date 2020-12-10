@@ -18,7 +18,7 @@ import javafx.util.Duration;
 
 public class subScene extends SubScene {
 	private String imagePath;
-	private AnchorPane aPane;
+	public AnchorPane aPane;
 	public subScene(String s)
 	{	super(new AnchorPane(),1050,700);
 		prefHeight(700);
