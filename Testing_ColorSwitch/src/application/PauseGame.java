@@ -39,6 +39,7 @@ public class PauseGame {
 			{
 				s1.moveScene2();
 				runningGame.animationTimer.start();
+				runningGame.stopDueToHit.setDefaut();
 			}
 		});
 		b2.setOnAction(new EventHandler<ActionEvent>() {
@@ -54,6 +55,7 @@ public class PauseGame {
 			{
 				runGame.stage.show();
 				runningGame.stage.hide();
+				runningGame.stopDueToHit.setDefaut();
 			}
 		});
 		
