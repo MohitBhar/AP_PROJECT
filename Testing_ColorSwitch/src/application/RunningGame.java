@@ -54,7 +54,7 @@ public class RunningGame {
 	private boolean keyPressedP;
 	private boolean firstPress=false;
 	private boolean ishit;
-	public RunningGame(RunGame rGame)
+	public RunningGame(RunGame rGame,State s)
 	{
 		this.runGame=rGame;
 		anchorPane=new AnchorPane();
@@ -63,10 +63,14 @@ public class RunningGame {
 		stage.setScene(scene);
 		display();
 		stage.getIcons().add(new Image("/application/Resources/titlelogo.png"));
-		createColorChanger();
-		createBall();
-		createStar();
-		createObstacle();
+		if(s==null)
+		{
+			createColorChanger();
+			createBall();
+			createStar();
+			createObstacle();
+			score();
+		}
 		s1=new subScene1("/application/Resources/YellowPanel2.png");
 		anchorPane.getChildren().add(s1);
 		s2=new subScene1("/application/Resources/YellowPanel2.png");
@@ -137,7 +141,6 @@ public class RunningGame {
 		stage.show();
 		background();
 		musicButton();
-		score();
 		pause();
 		functionKey();
 		//key2();

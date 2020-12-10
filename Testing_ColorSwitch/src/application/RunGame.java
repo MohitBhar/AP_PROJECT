@@ -244,7 +244,7 @@ public class RunGame {
 			@Override
 			public void handle(ActionEvent a)
 			{
-				RunningGame runningGame=new RunningGame(runGame);
+				RunningGame runningGame=new RunningGame(runGame,null);
 			}
 		});
 

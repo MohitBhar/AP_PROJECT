@@ -86,11 +86,11 @@ public class StopDueToHit {
 				s1.moveScene2();
 				if(runningGame.b1.getYPosition()>700)
 				{	
-					runningGame.b1.setYPosition(runningGame.b1.getYPosition()-48);
+					runningGame.b1.setYPosition(runningGame.b1.getYPosition()-50);
 					runningGame.b1.c1.setLayoutY(runningGame.b1.getYPosition());
 				}
 				else {
-					runningGame.b1.setYPosition(runningGame.b1.getYPosition()+48);
+					runningGame.b1.setYPosition(runningGame.b1.getYPosition()+50);
 					runningGame.b1.c1.setLayoutY(runningGame.b1.getYPosition());
 				}
 				runningGame.score=runningGame.score-2;
@@ -105,7 +105,7 @@ public class StopDueToHit {
 			@Override
 			public void handle(ActionEvent a)
 			{	runningGame.stage.close();
-				runningGame=new RunningGame(runGame);
+				runningGame=new RunningGame(runGame,null);
 				setDefaut();
 			}
 		});
