@@ -1,5 +1,7 @@
 package application;
 
+import java.awt.Button;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.image.ImageView;
@@ -14,12 +16,28 @@ public class StopDueToHit {
 	private subScene1 s1;
 	private RunGame runGame;
 	private Text scoreText=new Text();
+	private button Continue;
+	private button restartButton;
+	private button exitButton;
 	public StopDueToHit(RunningGame runningGame,RunGame runGame, subScene1 s1)
 	{
 		this.runningGame=runningGame;
 		this.runGame=runGame;
 		this.s1=s1;
 		createButtons();
+		checkScore();
+		setScore1();
+	}
+	public void checkScore()
+	{
+		if(runningGame.getScore()>=2)
+		{
+			Continue.setLayoutX(150);
+			restartButton.setLayoutY(100);
+			exitButton.setLayoutY(175);
+		}
+			
+		
 	}
 	public void createButtons()
 	{
@@ -29,12 +47,15 @@ public class StopDueToHit {
 		s1.aPane.getChildren().add(b1);
 		s1.aPane.getChildren().add(b2);
 		s1.aPane.getChildren().add(b3);
-		b1.setLayoutX(150);
+		this.Continue=b1;
+		this.restartButton=b2;
+		this.exitButton=b3;
+		b1.setLayoutX(450);
 		b1.setLayoutY(25);
 		b2.setLayoutX(150);
-		b2.setLayoutY(100);
+		b2.setLayoutY(50);
 		b3.setLayoutX(150);
-		b3.setLayoutY(175);
+		b3.setLayoutY(125);
 		setActions(b1,b2,b3);
 		ImageView iv=new ImageView("/application/Resources/totalStar.png");
 		iv.setLayoutX(40);
@@ -49,6 +70,12 @@ public class StopDueToHit {
 		s1.aPane.getChildren().add(scoreText);
 		
 
+	}
+	public void setDefaut()
+	{
+		s1.aPane.getChildren().remove(Continue);
+		s1.aPane.getChildren().remove(restartButton);
+		s1.aPane.getChildren().remove(exitButton);
 	}
 	public void setActions(button b1,button b2,button b3)
 	{
@@ -66,7 +93,10 @@ public class StopDueToHit {
 					runningGame.b1.setYPosition(runningGame.b1.getYPosition()+48);
 					runningGame.b1.c1.setLayoutY(runningGame.b1.getYPosition());
 				}
+				runningGame.score=runningGame.score-2;
+				runningGame.setScore();
 				setScore1();
+				setDefaut();
 				runningGame.animationTimer.start();
 				
 			}
@@ -76,6 +106,7 @@ public class StopDueToHit {
 			public void handle(ActionEvent a)
 			{	runningGame.stage.close();
 				runningGame=new RunningGame(runGame);
+				setDefaut();
 			}
 		});
 		b3.setOnAction(new EventHandler<ActionEvent>() {
@@ -84,6 +115,7 @@ public class StopDueToHit {
 			{
 				runGame.stage.show();
 				runningGame.stage.hide();
+				setDefaut();
 			}
 		});
 		

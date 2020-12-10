@@ -524,5 +524,8 @@ public class RunningGame {
 	{
 		scoreText.setText(Integer.toString(score));
 	}
-	
+	public int getScore()
+	{
+		return score;
+	}
 }
