@@ -10,8 +10,8 @@ public class State implements Serializable {
 		transient private ArrayList<star> stars;
 		transient private Ball b1;
 		protected int score;
-		protected double ballY;
-		protected ArrayList<Double> obstacleYCoordinates=new ArrayList<Double>();
+		protected float ballY;
+		protected ArrayList<Float> obstacleYCoordinates=new ArrayList<Float>();
 		protected ArrayList<Float> starYCoordinates=new ArrayList<Float>();
 		protected ArrayList<Float> colorChangerYCoordinates=new ArrayList<Float>();
 		public State(ArrayList<ObstacleAbstract> obstacles,ArrayList<ColorChanger> colorChangers,ArrayList<star> stars,Ball b1,int score)
@@ -41,7 +41,7 @@ public class State implements Serializable {
 		}
 		public void saveObstacleY() {
 			for(ObstacleAbstract x:obstacles) {
-				obstacleYCoordinates.add(x.getYPosition());
+				obstacleYCoordinates.add((float) x.getYPosition());
 			}
 		}
 		public void saveColorChangerY() {
@@ -54,7 +54,7 @@ public class State implements Serializable {
 			}
 		}
 		public void saveBallY() {
-			this.ballY=b1.c1.getLayoutY();
+			this.ballY=(float) b1.c1.getLayoutY();
 		}
 		
 		public void save() {

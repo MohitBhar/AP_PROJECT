@@ -165,11 +165,12 @@ public class RunGame implements Serializable{
 					for(int i=0;i<stateDeserializeList.size();i++) {
 						
 						System.out.println("---------");
-						State state=stateDeserializeList.get(0);
+						State state=stateDeserializeList.get(i);
 						System.out.println("score"+state.getScore());
 						System.out.println("ball y"+state.ballY);
-						
 					}
+					
+					RunningGame runningGame=new RunningGame(runGame, stateDeserializeList.get(0));
 					
 				} catch (ClassNotFoundException | IOException e) {
 					// TODO Auto-generated catch block

@@ -51,6 +51,7 @@ public class RunningGame implements Serializable{
 	protected ArrayList<star> stars=new ArrayList<star>();
 	protected ArrayList<ColorChanger> colorChangers=new ArrayList<ColorChanger>();
 	protected int score=0;
+	State state;
 	private Text scoreText;
 	private boolean keyPressed;
 	private boolean firstPress=false;
@@ -72,6 +73,17 @@ public class RunningGame implements Serializable{
 			createObstacle();
 			score();
 		}
+		else {
+			System.out.println("badbfaafffffffffffffffffffbaasdba");
+			state=s;
+			createColorChanger1();
+			createBall1();
+			createStar1();
+			createObstacle1();
+			score();
+			this.score=state.score;
+			setScore();
+		}
 		s1=new subScene1("/application/Resources/YellowPanel2.png");
 		anchorPane.getChildren().add(s1);
 		s2=new subScene1("/application/Resources/YellowPanel2.png");
@@ -82,7 +94,6 @@ public class RunningGame implements Serializable{
 	}
 	public void createObstacle()
 	{
-		
 		Obstacle4 o1=new Obstacle4(400,200-500+90,"1");
 		Group g1=o1.createObstacle();
 		obstacles.add(o1);
@@ -154,6 +165,69 @@ public class RunningGame implements Serializable{
 		anchorPane.getChildren().add(b1.createBall());
 		
 	}
+	
+	public void createObstacle1()
+	{
+		
+		Obstacle4 o1=new Obstacle4(400,state.obstacleYCoordinates.get(0),"1");
+		Group g1=o1.createObstacle();
+		obstacles.add(o1);
+		anchorPane.getChildren().add(g1);
+        Obstacle o2=new Obstacle(400,state.obstacleYCoordinates.get(1),"2");
+        Group g2=o2.createObstacle();
+        obstacles.add(o2);
+        anchorPane.getChildren().add(g2);
+        Obstacle5 o3=new Obstacle5(400,state.obstacleYCoordinates.get(2),"3");
+		Group g3=o3.createObstacle();
+		obstacles.add(o3);
+		anchorPane.getChildren().add(g3);
+        Obstacle2 o4=new Obstacle2(400,state.obstacleYCoordinates.get(3),"4");
+        Group g4=o4.createObstacle();
+        obstacles.add(o4);
+        anchorPane.getChildren().add(g4);
+    
+				
+	}
+	
+	
+
+	public void createStar1()
+	{
+		star star1=new star();
+		stars.add(star1);
+		star1.setXPosition(380);
+		star1.setYPosition(state.starYCoordinates.get(0));
+		anchorPane.getChildren().add(star1.createStar());
+		star star2=new star();
+		stars.add(star2);
+		star2.setXPosition(380);
+		star2.setYPosition(state.starYCoordinates.get(1));
+		anchorPane.getChildren().add(star2.createStar());
+	}
+	public void createColorChanger1()
+	{
+		ColorChanger changer1=new ColorChanger();
+		colorChangers.add(changer1);
+		changer1.setXPosition(390);
+		changer1.setYPosition(state.colorChangerYCoordinates.get(0));
+		anchorPane.getChildren().add(changer1.createColor());
+		ColorChanger changer2=new ColorChanger();
+		colorChangers.add(changer2);
+		changer2.setXPosition(390);
+		changer2.setYPosition(state.colorChangerYCoordinates.get(1));
+		anchorPane.getChildren().add(changer2.createColor());
+	
+	}
+	
+	public void createBall1()
+	{
+		b1=new Ball();
+		b1.setXPosition(400);
+		b1.setYPosition(state.ballY);
+		anchorPane.getChildren().add(b1.createBall());
+		
+	}
+	
 	public void display()
 	{
 		runGame.stage.hide();
