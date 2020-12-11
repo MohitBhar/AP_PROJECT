@@ -51,7 +51,6 @@ public class RunningGame {
 	public int score=0;
 	private Text scoreText;
 	private boolean keyPressed;
-	private boolean keyPressedP;
 	private boolean firstPress=false;
 	private boolean ishit;
 	public RunningGame(RunGame rGame,State s)

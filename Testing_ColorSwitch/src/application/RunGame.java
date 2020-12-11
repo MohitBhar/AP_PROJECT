@@ -1,6 +1,7 @@
 package application;
 
 import java.net.URL;
+import java.util.ArrayList;
 
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
@@ -40,6 +41,7 @@ public class RunGame {
 	public MediaPlayer mPlayer;
 	int count=1;
 	RunGame runGame=this;
+	public ArrayList<State> stateList;
 	
 	public RunGame()
 	{
