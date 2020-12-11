@@ -60,8 +60,8 @@ public class Ball implements Serializable{
 	{
 		this.xPostion=value;
 	}
-	public void setYPosition(float value)
+	public void setYPosition(float ballY)
 	{
-		this.yPosition=value;
+		this.yPosition=ballY;
 	}
 }
