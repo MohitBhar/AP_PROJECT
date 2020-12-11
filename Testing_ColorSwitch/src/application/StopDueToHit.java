@@ -30,7 +30,7 @@ public class StopDueToHit {
 	}
 	public void checkScore()
 	{
-		if(runningGame.getScore()>=2)
+		if(runningGame.getScore()>=5)
 		{
 			Continue.setLayoutX(150);
 			restartButton.setLayoutY(100);
@@ -93,7 +93,7 @@ public class StopDueToHit {
 					runningGame.b1.setYPosition(runningGame.b1.getYPosition()+50);
 					runningGame.b1.c1.setLayoutY(runningGame.b1.getYPosition());
 				}
-				runningGame.score=runningGame.score-2;
+				runningGame.score=runningGame.score-5;
 				runningGame.setScore();
 				setScore1();
 				setDefaut();
