@@ -26,6 +26,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -84,11 +85,11 @@ public class RunningGame {
 		Group g1=o1.createObstacle();
 		obstacles.add(o1);
 		anchorPane.getChildren().add(g1);
-        Obstacle3 o2=new Obstacle3(400,500,"2");
+        Obstacle o2=new Obstacle(400,500,"2");
         Group g2=o2.createObstacle();
         obstacles.add(o2);
         anchorPane.getChildren().add(g2);
-        Obstacle o3=new Obstacle(400,-200,"3");
+        Obstacle5 o3=new Obstacle5(400,-200,"3");
 		Group g3=o3.createObstacle();
 		obstacles.add(o3);
 		anchorPane.getChildren().add(g3);
@@ -97,6 +98,23 @@ public class RunningGame {
         obstacles.add(o4);
         anchorPane.getChildren().add(g4);
     
+//		Obstacle4 o1=new Obstacle4(400,200-500+90,"1");
+//		Group g1=o1.createObstacle();
+//		obstacles.add(o1);
+//		anchorPane.getChildren().add(g1);
+//        Obstacle3 o2=new Obstacle3(400,500,"2");
+//        Group g2=o2.createObstacle();
+//        obstacles.add(o2);
+//        anchorPane.getChildren().add(g2);
+//        Obstacle o3=new Obstacle(400,-200,"3");
+//		Group g3=o3.createObstacle();
+//		obstacles.add(o3);
+//		anchorPane.getChildren().add(g3);
+//        Obstacle2 o4=new Obstacle2(400,-500,"4");
+//        Group g4=o4.createObstacle();
+//        obstacles.add(o4);
+//        anchorPane.getChildren().add(g4);
+//    
 				
 	}
 	public void createStar()
@@ -212,6 +230,22 @@ public class RunningGame {
 									}
 									continue;
 								}
+								if(x instanceof Obstacle5) {
+//									
+									x.setYPosition(x.getYPosition()-1400);
+									ArrayList<Rectangle> rectangleList=((Obstacle5)x).rectangleList;
+//									System.out.println("111111111111111111111111111111");
+									for(Rectangle y:rectangleList)
+									{
+										System.out.println();
+										y.setY(y.getY()-1400);
+									}
+									for(Rotate y:x.rotateList)
+									{
+										y.setPivotY(x.getYPosition()+10);		
+									}
+									continue;
+								}
 								x.setYPosition(x.getYPosition()-1400);
 								
 								for(Arc y:x.arcList)
@@ -302,6 +336,22 @@ public class RunningGame {
 //						}
 						
 						
+					}
+					continue;
+				}
+				if(x instanceof Obstacle5) {
+//					
+					x.setYPosition(x.getYPosition()+5);
+					ArrayList<Rectangle> rectangleList=((Obstacle5)x).rectangleList;
+//					System.out.println("111111111111111111111111111111");
+					for(Rectangle y:rectangleList)
+					{
+						System.out.println();
+						y.setY(y.getY()+5);
+					}
+					for(Rotate y:x.rotateList)
+					{
+						y.setPivotY(x.getYPosition()+10);		
 					}
 					continue;
 				}
