@@ -1,5 +1,7 @@
 package application;
 
+import java.io.Serializable;
+
 import javafx.animation.TranslateTransition;
 import javafx.scene.SubScene;
 import javafx.scene.image.Image;
@@ -10,7 +12,7 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.util.Duration;
 
-public class subScene1 extends SubScene {
+public class subScene1 extends SubScene implements Serializable{
 	private String imagePath;
 	public AnchorPane aPane;
 	public subScene1(String s)

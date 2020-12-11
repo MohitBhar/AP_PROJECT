@@ -1,5 +1,6 @@
 package application;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javafx.animation.Animation;
@@ -16,7 +17,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
-public abstract class ObstacleAbstract {
+public abstract class ObstacleAbstract implements Serializable{
 	protected double xPosition;
 	protected double yPosition;
 	protected Group g1;

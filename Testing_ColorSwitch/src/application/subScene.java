@@ -1,6 +1,8 @@
 package application;
 
 
+import java.io.Serializable;
+
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -16,7 +18,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
-public class subScene extends SubScene {
+public class subScene extends SubScene implements Serializable{
 	private String imagePath;
 	public AnchorPane aPane;
 	public subScene(String s)

@@ -1,11 +1,12 @@
 package application;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-public class Ball {
+public class Ball implements Serializable{
 	ArrayList<Color> color;
 	private float radius;
 	private Color color2;

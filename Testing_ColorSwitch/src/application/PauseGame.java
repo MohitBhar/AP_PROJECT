@@ -1,5 +1,7 @@
 package application;
 
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
@@ -46,7 +48,23 @@ public class PauseGame {
 			@Override
 			public void handle(ActionEvent a)
 			{
-				//s1.moveScene2();
+				State state=new State(runningGame.obstacles, runningGame.colorChangers, runningGame.stars, runningGame.b1 , runningGame.score);
+				
+				// Mohit's design
+				State.stateList_stateclass.add(state);
+				runGame.stateList.add(state);
+				try {
+					runGame.serialize(runGame.stateList);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
+//				s1.moveScene2();
+				runGame.stage.show();
+				runningGame.stage.hide();
+				
 			}
 		});
 		b3.setOnAction(new EventHandler<ActionEvent>() {
@@ -60,4 +78,5 @@ public class PauseGame {
 		});
 		
 	}
+	
 }

@@ -1,8 +1,10 @@
 package application;
 
+import java.io.Serializable;
+
 import javafx.scene.image.ImageView;
 
-public class ColorChanger {
+public class ColorChanger implements Serializable{
 	private float xPosition;
 	private float yPosition;
 	private String pathString;

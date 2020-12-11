@@ -1,6 +1,7 @@
 package application;
 
 
+import java.io.Serializable;
 import java.time.Year;
 import java.util.ArrayList;
 import javafx.animation.Animation;
@@ -35,7 +36,7 @@ import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class RunningGame {
+public class RunningGame implements Serializable{
 	private RunGame runGame;
 	private AnchorPane anchorPane;
 	public Stage stage;
@@ -45,11 +46,11 @@ public class RunningGame {
 	private subScene1 s1;
 	private subScene1 s2;
 	private RunningGame runningGame=this;
-	public Ball b1;
-	private ArrayList<ObstacleAbstract> obstacles=new ArrayList<ObstacleAbstract>();
-	private ArrayList<star> stars=new ArrayList<star>();
-	private ArrayList<ColorChanger> colorChangers=new ArrayList<ColorChanger>();
-	public int score=0;
+	protected Ball b1;
+	protected ArrayList<ObstacleAbstract> obstacles=new ArrayList<ObstacleAbstract>();
+	protected ArrayList<star> stars=new ArrayList<star>();
+	protected ArrayList<ColorChanger> colorChangers=new ArrayList<ColorChanger>();
+	protected int score=0;
 	private Text scoreText;
 	private boolean keyPressed;
 	private boolean firstPress=false;
@@ -81,6 +82,7 @@ public class RunningGame {
 	}
 	public void createObstacle()
 	{
+		
 		Obstacle4 o1=new Obstacle4(400,200-500+90,"1");
 		Group g1=o1.createObstacle();
 		obstacles.add(o1);

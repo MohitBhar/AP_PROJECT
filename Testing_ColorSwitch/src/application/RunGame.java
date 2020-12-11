@@ -1,5 +1,12 @@
 package application;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -29,7 +36,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class RunGame {
+
+public class RunGame implements Serializable{
 	private AnchorPane apane;
 	private Scene scene;
 	public Stage stage;
@@ -41,10 +49,12 @@ public class RunGame {
 	public MediaPlayer mPlayer;
 	int count=1;
 	RunGame runGame=this;
+	public ArrayList<State> stateDeserializeList;
 	public ArrayList<State> stateList;
 	
 	public RunGame()
 	{
+		stateList=new ArrayList<State>();
 		this.mainWidth=1050;
 		this.mainHeight=700;
 		this.displayGUI();
@@ -59,7 +69,7 @@ public class RunGame {
 		backGround();
 		logo();
 		buttons();
-		music();
+//		music();
 		stage.getIcons().add(new Image("/application/Resources/titlelogo.png"));
 	}
 	public void buttons()
@@ -140,10 +150,34 @@ public class RunGame {
 		s2.addImage("/application/Resources/PurplePanel.png",150,150);
 		button b2=new button("/application/Resources/yellow2.png","/application/Resources/yellow.png");
 		s1.aPane.getChildren().add(b2);
+		
+		
 		b2.setLayoutX(500);
 		b2.setLayoutY(400);
-		
-		
+		b2.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent a)
+			{
+				try {
+					stateDeserializeList=deserialize();
+					System.out.println("Desrialization done successfull");
+					System.out.println("array list size= "+ stateDeserializeList.size());
+					for(int i=0;i<stateDeserializeList.size();i++) {
+						
+						System.out.println("---------");
+						State state=stateDeserializeList.get(0);
+						System.out.println("score"+state.getScore());
+						System.out.println("ball y"+state.ballY);
+						
+					}
+					
+				} catch (ClassNotFoundException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+		});
 		
 	}
 	public void logo()
@@ -266,7 +300,7 @@ public class RunGame {
 			@Override
 			public void handle(ActionEvent a)
 			{	
-				s1.moveScene1();
+				s1.moveScene1();				
 			}
 		});
 		
@@ -312,5 +346,37 @@ public class RunGame {
 			}
 		});
 	}
+	
+	public void serialize(ArrayList<State> s) throws FileNotFoundException, IOException {
+		ArrayList<State> s1 = s;
+		ObjectOutputStream out = null;
+		try {
+			out = new ObjectOutputStream(new FileOutputStream("file.txt"));
+			out.writeObject(s1);
+		}
+		finally {
+			out.close();
+			System.out.println("=============================");
+		}
+		
+	}
+	public ArrayList<State> deserialize() throws FileNotFoundException, IOException, ClassNotFoundException {
+		ArrayList<State> s1 ;
+		ObjectInputStream in = null;
+//		State s2;
+		
+		try {
+			in= new ObjectInputStream(new FileInputStream("file.txt"));
+			s1=(ArrayList<State>) in.readObject();
+
+		}
+		finally {
+			in.close();
+			
+		}
+		return s1;
+	}
+	
+	
 	
 }
