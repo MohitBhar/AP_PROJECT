@@ -41,7 +41,6 @@ public class subScene extends SubScene implements Serializable{
 	public void moveScene1()
 	{
 		TranslateTransition transition=new TranslateTransition();
-		System.out.println("Hello1");
 		transition.setNode(this);
 		transition.setDuration(Duration.seconds(0.7));
 		transition.setToY(+700);
@@ -51,7 +50,6 @@ public class subScene extends SubScene implements Serializable{
 	public void moveScene2()
 	{
 		TranslateTransition transition=new TranslateTransition();
-		System.out.println("Hello1");
 		transition.setNode(this);
 		transition.setDuration(Duration.seconds(1));
 		transition.setToY(-700);

@@ -50,11 +50,20 @@ public class RunGame implements Serializable{
 	int count=1;
 	RunGame runGame=this;
 	public ArrayList<State> stateDeserializeList;
-	public ArrayList<State> stateList;
+	public static ArrayList<State> stateList;
 	
 	public RunGame()
 	{
-		stateList=new ArrayList<State>();
+		try {
+			stateList=deserialize();
+			if(stateList==null)
+			{
+				System.out.println("The list is Null");
+			}
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.mainWidth=1050;
 		this.mainHeight=700;
 		this.displayGUI();
@@ -69,7 +78,7 @@ public class RunGame implements Serializable{
 		backGround();
 		logo();
 		buttons();
-//		music();
+		music();
 		stage.getIcons().add(new Image("/application/Resources/titlelogo.png"));
 	}
 	public void buttons()
@@ -148,38 +157,6 @@ public class RunGame implements Serializable{
 		s1.addImage("/application/Resources/YellowPanel1.png",165,150 );
 		s3.addImage("/application/Resources/yellowpanel.png",540,150);
 		s2.addImage("/application/Resources/PurplePanel.png",150,150);
-		button b2=new button("/application/Resources/yellow2.png","/application/Resources/yellow.png");
-		s1.aPane.getChildren().add(b2);
-		
-		
-		b2.setLayoutX(500);
-		b2.setLayoutY(400);
-		b2.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent a)
-			{
-				try {
-					stateDeserializeList=deserialize();
-					System.out.println("Desrialization done successfull");
-					System.out.println("array list size= "+ stateDeserializeList.size());
-					for(int i=0;i<stateDeserializeList.size();i++) {
-						
-						System.out.println("---------");
-						State state=stateDeserializeList.get(i);
-						System.out.println("score"+state.getScore());
-						System.out.println("ball y"+state.ballY);
-					}
-					
-					RunningGame runningGame=new RunningGame(runGame, stateDeserializeList.get(0));
-					
-				} catch (ClassNotFoundException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-			}
-		});
-		
 	}
 	public void logo()
 	{	ImageView iv1=new ImageView("/application/Resources/C.jpg");
@@ -301,9 +278,62 @@ public class RunGame implements Serializable{
 			@Override
 			public void handle(ActionEvent a)
 			{	
-				s1.moveScene1();				
+				s1.moveScene1();
+				loadGameButton1();
 			}
 		});
+		
+	}
+	public void loadGameButton1()
+	{	ArrayList<button1> list=new ArrayList<button1>();
+		try {
+			stateDeserializeList=deserialize();
+			if(stateDeserializeList.size()<=5)
+			{
+				for(int i=0;i<stateDeserializeList.size();i++) 
+				{
+					button1 b1=new button1("Saved Game: "+Integer.toString(i+1));
+					list.add(b1);
+					s1.aPane.getChildren().add(b1);
+					b1.setLayoutX(400);
+					int count=i;
+					b1.setLayoutY(200+(list.size()-1)*75);
+					b1.setOnAction(new EventHandler<ActionEvent>() {
+						@Override
+						public void handle(ActionEvent a)
+						{
+							RunningGame runningGame=new RunningGame(runGame, stateDeserializeList.get(count));
+							s1.moveScene2();
+						}
+					});
+				}
+			}
+			else {
+				int count=0;
+				for(int i=stateDeserializeList.size()-5;i<stateDeserializeList.size();i++) 
+				{
+					button1 b1=new button1("Saved Game: "+Integer.toString(++count));
+					list.add(b1);
+					s1.aPane.getChildren().add(b1);
+					b1.setLayoutX(400);
+					int count1=i;
+					b1.setLayoutY(200+(list.size()-1)*75);
+					b1.setOnAction(new EventHandler<ActionEvent>() {
+						@Override
+						public void handle(ActionEvent a)
+						{
+							RunningGame runningGame=new RunningGame(runGame, stateDeserializeList.get(count1));
+							s1.moveScene2();
+						}
+					});
+				
+				}
+			}
+			
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	private void helpButton()
