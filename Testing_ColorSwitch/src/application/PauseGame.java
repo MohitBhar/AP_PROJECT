@@ -41,7 +41,8 @@ public class PauseGame {
 			{
 				s1.moveScene2();
 				runningGame.animationTimer.start();
-				
+				runningGame.stopDueToHit.setDefaut();
+				runningGame.stopDueToHit.setScore1();
 			}
 		});
 		b2.setOnAction(new EventHandler<ActionEvent>() {
@@ -59,7 +60,8 @@ public class PauseGame {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
+				runningGame.stopDueToHit.setDefaut();
+				runningGame.stopDueToHit.setScore1();
 				
 //				s1.moveScene2();
 				runGame.stage.show();
@@ -74,9 +76,9 @@ public class PauseGame {
 				runGame.stage.show();
 				runningGame.stage.hide();
 				
+				
 			}
 		});
 		
 	}
-	
 }

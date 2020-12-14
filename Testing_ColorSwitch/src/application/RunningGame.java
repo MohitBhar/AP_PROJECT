@@ -42,7 +42,7 @@ public class RunningGame implements Serializable{
 	public Stage stage;
 	private Scene scene;
 	public AnimationTimer animationTimer;
-	private StopDueToHit stopDueToHit;
+	public StopDueToHit stopDueToHit;
 	private subScene1 s1;
 	private subScene1 s2;
 	private RunningGame runningGame=this;
