@@ -38,6 +38,7 @@ import javafx.util.Duration;
 
 
 public class RunGame implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private AnchorPane apane;
 	private Scene scene;
 	public Stage stage;
@@ -95,7 +96,6 @@ public class RunGame implements Serializable{
 		iv1.setLayoutY(35);
 		ImageView iv2=new ImageView("/application/Resources/star.png");
 		apane.getChildren().add(iv2);
-		star();
 		iv2.setLayoutX(790);
 		iv2.setLayoutY(35);
 		scene();
@@ -154,9 +154,9 @@ public class RunGame implements Serializable{
 		apane.getChildren().add(s2);
 		apane.getChildren().add(s3);
 		s3.addImage("/application/Resources/TurquoisePanel.jpg",25,150);
-		s1.addImage("/application/Resources/YellowPanel1.png",165,150 );
+		s1.addImage("/application/Resources/YellowPanel1.png",280,150 );
 		s3.addImage("/application/Resources/yellowpanel.png",540,150);
-		s2.addImage("/application/Resources/PurplePanel.png",150,150);
+		s2.addImage("/application/Resources/PurplePanel.jpg",150,150);
 	}
 	public void logo()
 	{	ImageView iv1=new ImageView("/application/Resources/C.jpg");
@@ -211,21 +211,6 @@ public class RunGame implements Serializable{
         rTrans1.setInterpolator(Interpolator.LINEAR);
         rTrans.play();
         rTrans1.play();
-		
-	}
-	public void star()
-	{
-		ImageView iv=new ImageView("/application/Resources/totalStar.png");
-		iv.setLayoutX(550);
-		iv.setLayoutY(600);
-		apane.getChildren().add(iv);
-		Text t1=new Text();
-		t1.setText("0");
-		t1.setFill(Color.WHITE);
-		t1.setLayoutX(625);
-		t1.setLayoutY(635);
-		t1.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 35));
-		apane.getChildren().add(t1);
 		
 	}
 	public void music()

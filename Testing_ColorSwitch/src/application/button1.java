@@ -4,6 +4,7 @@ import java.awt.Font;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
@@ -78,7 +79,7 @@ public class button1 extends Button{
 				@Override
 				public void handle(MouseEvent a)
 				{
-					setEffect(new Glow());
+					setEffect(new DropShadow());
 				}
 			});
 		}
