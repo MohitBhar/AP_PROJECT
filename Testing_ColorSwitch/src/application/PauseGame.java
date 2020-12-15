@@ -60,8 +60,12 @@ public class PauseGame {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				runningGame.stopDueToHit.setDefaut();
-				runningGame.stopDueToHit.setScore1();
+				if(runningGame.stopDueToHit!=null)
+				{
+					runningGame.stopDueToHit.setDefaut();
+					runningGame.stopDueToHit.setScore1();
+					
+				}	
 				
 //				s1.moveScene2();
 				runGame.stage.show();

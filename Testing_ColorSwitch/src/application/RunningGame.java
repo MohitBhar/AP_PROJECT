@@ -251,7 +251,14 @@ public class RunningGame implements Serializable{
 					
 				}
 				else if(firstPress=true) {
-					gravity();
+					if(score<=5)
+					{
+						gravity();
+					}
+					else {
+						gravity1();
+					}
+					
 					upKey();
 					for(ColorChanger x:colorChangers)
 					{
@@ -367,6 +374,7 @@ public class RunningGame implements Serializable{
 			stopDueToHit.setScore2();
 			animationTimer.stop();
 			s2.moveScene1();
+			
 		}
 	}
 	public void hit()
@@ -376,6 +384,7 @@ public class RunningGame implements Serializable{
 			stopDueToHit=new StopDueToHit(runningGame, runGame, s2);
 			stopDueToHit.setScore2();
 			animationTimer.stop();
+			firstPress=false;
 		}
 	}
 	public void fun2()
@@ -530,6 +539,11 @@ public class RunningGame implements Serializable{
 	{
 		//System.out.println(1);
 		b1.setYPosition(b1.getYPosition()+2);
+		b1.c1.setLayoutY(b1.getYPosition());
+	}
+	public void gravity1()
+	{
+		b1.setYPosition(b1.getYPosition()+4);
 		b1.c1.setLayoutY(b1.getYPosition());
 	}
 	public void upKey()

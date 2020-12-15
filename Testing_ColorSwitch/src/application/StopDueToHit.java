@@ -92,7 +92,7 @@ public class StopDueToHit {
 					runningGame.b1.c1.setLayoutY(runningGame.b1.getYPosition());
 				}
 				else {
-					runningGame.b1.setYPosition(runningGame.b1.getYPosition()+50);
+					runningGame.b1.setYPosition(runningGame.b1.getYPosition()+70);
 					runningGame.b1.c1.setLayoutY(runningGame.b1.getYPosition());
 				}
 				
