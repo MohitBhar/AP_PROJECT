@@ -94,6 +94,11 @@ public class StopDueToHit {
 				else {
 					runningGame.b1.setYPosition(runningGame.b1.getYPosition()+70);
 					runningGame.b1.c1.setLayoutY(runningGame.b1.getYPosition());
+					if(runningGame.b1.getYPosition()>700)
+					{	
+						runningGame.b1.setYPosition(runningGame.b1.getYPosition()-100);
+						runningGame.b1.c1.setLayoutY(runningGame.b1.getYPosition());
+					}
 				}
 				
 				//Score changes 2
