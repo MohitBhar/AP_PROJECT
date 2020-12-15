@@ -372,7 +372,7 @@ public class RunGame implements Serializable{
 		}
 		finally {
 			out.close();
-			System.out.println("=============================");
+//			System.out.println("=============================");
 		}
 		
 	}

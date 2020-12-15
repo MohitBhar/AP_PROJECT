@@ -74,7 +74,7 @@ public class RunningGame implements Serializable{
 			score();
 		}
 		else {
-			System.out.println("badbfaafffffffffffffffffffbaasdba");
+//			System.out.println("badbfaafffffffffffffffffffbaasdba");
 			state=s;
 			createColorChanger1();
 			createBall1();
@@ -320,7 +320,7 @@ public class RunningGame implements Serializable{
 //									System.out.println("111111111111111111111111111111");
 									for(Rectangle y:rectangleList)
 									{
-										System.out.println();
+//										System.out.println();
 										y.setY(y.getY()-1400);
 									}
 									for(Rotate y:x.rotateList)
@@ -431,7 +431,7 @@ public class RunningGame implements Serializable{
 //					System.out.println("111111111111111111111111111111");
 					for(Rectangle y:rectangleList)
 					{
-						System.out.println();
+//						System.out.println();
 						y.setY(y.getY()+5);
 					}
 					for(Rotate y:x.rotateList)
@@ -444,8 +444,8 @@ public class RunningGame implements Serializable{
 					//System.out.println("-----------------");
 					
 					x.setYPosition(x.getYPosition()+5);
-					System.out.println(x.circleList.size()+"circle size");
-					System.out.println(x.arcList.size()+"arc size");
+//					System.out.println(x.circleList.size()+"circle size");
+//					System.out.println(x.arcList.size()+"arc size");
 					
 					for(Circle y:x.circleList)
 					{
