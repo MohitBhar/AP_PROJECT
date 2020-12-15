@@ -41,8 +41,12 @@ public class PauseGame {
 			{
 				s1.moveScene2();
 				runningGame.animationTimer.start();
-				runningGame.stopDueToHit.setDefaut();
-				runningGame.stopDueToHit.setScore1();
+				if(runningGame.stopDueToHit!=null)
+				{
+					runningGame.stopDueToHit.setDefaut();
+					runningGame.stopDueToHit.setScore1();
+					
+				}
 			}
 		});
 		b2.setOnAction(new EventHandler<ActionEvent>() {
