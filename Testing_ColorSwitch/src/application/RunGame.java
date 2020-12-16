@@ -58,17 +58,17 @@ public class RunGame implements Serializable{
 	
 	public RunGame()
 	{
-		stateList=new ArrayList<State>();
-//		try {
-//			stateList=deserialize();
-//			if(stateList==null)
-//			{
-//				System.out.println("The list is Null");
-//			}
-//		} catch (ClassNotFoundException | IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		
+		try {
+			stateList=deserialize();
+			if(stateList==null)
+			{
+				System.out.println("The list is Null");
+			}
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.mainWidth=1050;
 		this.mainHeight=700;
 		this.displayGUI();

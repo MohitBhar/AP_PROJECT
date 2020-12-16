@@ -32,7 +32,7 @@ public class StopDueToHit {
 	{
 		
 		// Score changes 1
-		if(runningGame.getScore()>=0)
+		if(runningGame.getScore()>=5)
 		{
 			Continue.setLayoutX(150);
 			restartButton.setLayoutY(100);
@@ -102,7 +102,7 @@ public class StopDueToHit {
 				}
 				
 				//Score changes 2
-				runningGame.score=runningGame.score-0;
+				runningGame.score=runningGame.score-5;
 				runningGame.setScore();
 				setScore1();
 				setDefaut();
