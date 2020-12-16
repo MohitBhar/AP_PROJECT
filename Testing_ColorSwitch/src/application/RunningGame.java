@@ -110,7 +110,15 @@ public class RunningGame implements Serializable{
         Group g4=o4.createObstacle();
         obstacles.add(o4);
         anchorPane.getChildren().add(g4);
-    
+        Obstacle3 o5=new Obstacle3(400,-900,"5");
+        Group g5=o5.createObstacle();
+        obstacles.add(o5);
+        anchorPane.getChildren().add(g5);
+        Obstacle5 o6=new Obstacle5(400,-1200,"6");
+		Group g6=o6.createObstacle();
+		obstacles.add(o6);
+		anchorPane.getChildren().add(g6);
+        
 //		Obstacle4 o1=new Obstacle4(400,200-500+90,"1");
 //		Group g1=o1.createObstacle();
 //		obstacles.add(o1);
@@ -185,7 +193,15 @@ public class RunningGame implements Serializable{
         Group g4=o4.createObstacle();
         obstacles.add(o4);
         anchorPane.getChildren().add(g4);
-    
+        Obstacle3 o5=new Obstacle3(400,state.obstacleYCoordinates.get(4),"5");
+        Group g5=o5.createObstacle();
+        obstacles.add(o5);
+        anchorPane.getChildren().add(g5);
+        Obstacle5 o6=new Obstacle5(400,state.obstacleYCoordinates.get(5),"6");
+		Group g6=o6.createObstacle();
+		obstacles.add(o6);
+		anchorPane.getChildren().add(g6);
+        
 				
 	}
 	
@@ -283,15 +299,15 @@ public class RunningGame implements Serializable{
 					}
 					for(ObstacleAbstract x:obstacles)
 					{		
-							
+							int resetVariable=2100;
 							if(x.getYPosition()>650)
 							{
 								if(x instanceof Obstacle3) {
 //									
-									x.setYPosition(x.getYPosition()-1400);
+									x.setYPosition(x.getYPosition()-resetVariable);
 									for(Circle y:x.circleList)
 									{
-										y.setCenterY(y.getCenterY()-1400);
+										y.setCenterY(y.getCenterY()-resetVariable);
 									}
 									for(Rotate y:x.rotateList)
 									{
@@ -301,10 +317,10 @@ public class RunningGame implements Serializable{
 								}
 								if(x instanceof Obstacle3) {
 //									
-									x.setYPosition(x.getYPosition()-1400);
+									x.setYPosition(x.getYPosition()-resetVariable);
 									for(Circle y:x.circleList)
 									{
-										y.setCenterY(y.getCenterY()-1400);
+										y.setCenterY(y.getCenterY()-resetVariable);
 									}
 									for(Arc y:x.arcList)
 									{
@@ -315,13 +331,13 @@ public class RunningGame implements Serializable{
 								}
 								if(x instanceof Obstacle5) {
 //									
-									x.setYPosition(x.getYPosition()-1400);
+									x.setYPosition(x.getYPosition()-resetVariable);
 									ArrayList<Rectangle> rectangleList=((Obstacle5)x).rectangleList;
 //									System.out.println("111111111111111111111111111111");
 									for(Rectangle y:rectangleList)
 									{
 //										System.out.println();
-										y.setY(y.getY()-1400);
+										y.setY(y.getY()-resetVariable);
 									}
 									for(Rotate y:x.rotateList)
 									{
@@ -329,7 +345,7 @@ public class RunningGame implements Serializable{
 									}
 									continue;
 								}
-								x.setYPosition(x.getYPosition()-1400);
+								x.setYPosition(x.getYPosition()-resetVariable);
 								
 								for(Arc y:x.arcList)
 								{
