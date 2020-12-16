@@ -13,10 +13,15 @@ import java.util.ArrayList;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
+import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -25,14 +30,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -56,17 +58,17 @@ public class RunGame implements Serializable{
 	
 	public RunGame()
 	{
-//		stateList=new ArrayList<State>();
-		try {
-			stateList=deserialize();
-			if(stateList==null)
-			{
-				System.out.println("The list is Null");
-			}
-		} catch (ClassNotFoundException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		stateList=new ArrayList<State>();
+//		try {
+//			stateList=deserialize();
+//			if(stateList==null)
+//			{
+//				System.out.println("The list is Null");
+//			}
+//		} catch (ClassNotFoundException | IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		this.mainWidth=1050;
 		this.mainHeight=700;
 		this.displayGUI();
@@ -156,7 +158,7 @@ public class RunGame implements Serializable{
 		apane.getChildren().add(s2);
 		apane.getChildren().add(s3);
 		s3.addImage("/application/Resources/TurquoisePanel.jpg",25,150);
-		s1.addImage("/application/Resources/YellowPanel1.png",280,150 );
+		s1.addImage("/application/Resources/YellowPanel1.jpg",100,150 );
 		s3.addImage("/application/Resources/yellowpanel.png",540,150);
 		s2.addImage("/application/Resources/PurplePanel.jpg",150,150);
 	}
@@ -273,158 +275,73 @@ public class RunGame implements Serializable{
 	}
 	public void loadGameButton1() {
 		ArrayList<button1> list=new ArrayList<button1>();
-		int index=0;
-		button1 nextButton=new button1("NEXT");
-		button1 prevButton=new button1("PREVIOUS");
-		prevButton.setLayoutX(100-50);
-		prevButton.setLayoutY(200);
-		nextButton.setLayoutX(600+200);
-		nextButton.setLayoutY(200);
-		s1.aPane.getChildren().add(nextButton);
-		s1.aPane.getChildren().add(prevButton);
-		
-		button1 removeButton=new button1("REMOVE ALL");
-		removeButton.setLayoutX(400);
-		removeButton.setLayoutY(75);
-		s1.aPane.getChildren().add(removeButton);
-	
-		removeButton.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
+		Group root = new Group();
+		s1.setRoot(root);
+		ScrollBar sc = new ScrollBar();
+		sc.setOrientation(Orientation.VERTICAL);
+		VBox vb = new VBox();
+		try {
+			stateDeserializeList=deserialize();
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for(int i=0;i<stateDeserializeList.size();i++)
+		{
+			button1 b1=new button1("Saved Game-"+ Integer.toString(i+1));
+			vb.getChildren().add(b1);
+			list.add(b1);
+			int test=i;
+			b1.setOnAction(new EventHandler<ActionEvent>() {
+				public void handle(ActionEvent a)
+				{
+					RunningGame runningGame=new RunningGame(runGame, stateDeserializeList.get(test));
+					s1.moveScene2();
+					s1.aPane.getChildren().remove(root);
+
+				}
+			});
+		}
+		sc.setMax(stateDeserializeList.size()*50);
+		root.setLayoutX(600);
+		root.setLayoutY(200);
+		sc.setLayoutX(300);
+		root.getChildren().addAll(vb, sc);
+		sc.valueProperty().addListener(new ChangeListener<Number>() {
+		            public void changed(ObservableValue<? extends Number> ov,
+		                Number old_val, Number new_val) {
+		                    vb.setLayoutY(-new_val.doubleValue());
+		            }
+		        });
+		s1.aPane.getChildren().add(root);
+		button1 b=new button1("Remove All");
+		b.setLayoutX(220);
+		b.setLayoutY(330);
+		b.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent a)
 			{
-				removeElementsfromList(list);
+				s1.aPane.getChildren().remove(root);
 				stateList=new ArrayList<State>();
-				
 				try {
 					serialize(stateList);
 					try {
-						stateDeserializeList=deserialize();
-//						System.out.println("deserialize"+stateDeserializeList.size());
+						stateList=deserialize();
 					} catch (ClassNotFoundException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				removeElementsfromList(list);
-//				System.out.println("deserialize+++"+stateDeserializeList.size());
 			}
 		});
+		s1.aPane.getChildren().add(b);
 		
-		
-		try {
-			stateDeserializeList=deserialize();
-			System.out.println("SIZE OF THE LIST: "+stateDeserializeList.size());
-			page=0;
-			selectingLoadGame(list);
-			
-			
-			
-			prevButton.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent a)
-				{
-					if(page>0) {
-						removeElementsfromList(list);
-						page=page-1;
-						selectingLoadGame(list);
-					}
-					
-				}
-			});
-			
-			nextButton.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent a)
-				{
-					int lastpage=(int)(stateDeserializeList.size()/5);
-					if(page<lastpage) {
-						removeElementsfromList(list);
-						page=page+1;
-						selectingLoadGame(list);
-					}
-					
-				}
-			});
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
-	private void selectingLoadGame(ArrayList<button1> list){
-		try {
-			
-			int index=page*5;
-			if(stateDeserializeList.size()-page*5<=0) {
-				return ;
-			}
-			else
-			{
-				int count1=0;
-				for(int i=index;i<stateDeserializeList.size();i++) 
-				{
-					if(count1>4) {
-						break;
-					}
-					count1+=1;
-					index=i;
-					button1 b1=new button1("Saved Game: "+Integer.toString(i+1));
-					list.add(b1);
-					s1.aPane.getChildren().add(b1);
-					b1.setLayoutX(400);
-					int count=i;
-					b1.setLayoutY(200+(count1-1)*75);
-					b1.setOnAction(new EventHandler<ActionEvent>() {
-						@Override
-						public void handle(ActionEvent a)
-						{
-							RunningGame runningGame=new RunningGame(runGame, stateDeserializeList.get(count));
-							s1.moveScene2();
-						}
-					});
-				}
-			}
-						
-		}
-		finally {
-			return ;
-		}
-	}
-	
-	public void removeElementsfromList(ArrayList<button1> list) {
-//		int size=list.size();
-//		while (list.size()>0) {
-//			for (int i = 0; i < s1.aPane.get; i++) {
-//				
-//			}
-		
-//		}
-		System.out.println("------------"+list.size());
-		for (int i = 0; i < list.size(); i++) {
-			System.out.println("++"+list.get(i).getLayoutY());
-			
-			list.get(i).setLayoutY(1200);
-			System.out.println("++++"+list.get(i).getLayoutY());
-			
-			
-		}
-		while(list.size()>0) {
-			list.remove(0);
-		}
-	}
-	
-	
-	
+	}	
 	private void helpButton()
 	{
 		button b1=new button("/application/Resources/purple2.png","/application/Resources/purple.png");

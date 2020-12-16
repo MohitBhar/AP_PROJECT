@@ -7,6 +7,7 @@ import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Group;
 import javafx.scene.SubScene;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.ImageView;
@@ -21,6 +22,7 @@ import javafx.util.Duration;
 public class subScene extends SubScene implements Serializable{
 	private String imagePath;
 	public AnchorPane aPane;
+	public Group rootGroup;
 	public subScene(String s)
 	{	super(new AnchorPane(),1050,700);
 		prefHeight(700);
@@ -69,6 +71,11 @@ public class subScene extends SubScene implements Serializable{
 			public void handle(ActionEvent a)
 			{
 				moveScene2();
+				if(rootGroup!=null)
+				{
+					aPane.getChildren().remove(rootGroup);
+				}
+				
 			}
 		});
 	}
@@ -90,5 +97,9 @@ public class subScene extends SubScene implements Serializable{
 				imageView.setEffect(null);
 			}
 		});
+	}
+	public void setRoot(Group g)
+	{
+		this.rootGroup=g;
 	}
 }
