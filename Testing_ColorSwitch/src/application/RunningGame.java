@@ -559,7 +559,13 @@ public class RunningGame implements Serializable{
 	}
 	public void gravity1()
 	{
-		b1.setYPosition(b1.getYPosition()+4);
+		float gravity=(float) (2+((int) (score/5))*0.2);
+		if(gravity>3) {
+//			System.out.println("set to 4");
+			gravity=3;
+		}
+//		System.out.println("============ gravity"+gravity);
+		b1.setYPosition(b1.getYPosition()+gravity);
 		b1.c1.setLayoutY(b1.getYPosition());
 	}
 	public void upKey()
