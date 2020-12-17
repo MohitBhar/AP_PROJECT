@@ -292,7 +292,7 @@ public class RunningGame implements Serializable{
 					{
 						bonusGravity(0);
 						imageBonusImageView.setLayoutY(-40);
-						bonusThreshold=bonusThreshold+5;
+						bonusThreshold=bonusThreshold*2;
 						count=0;
 						AnimationTimer animationTimer=new AnimationTimer() {
 							
