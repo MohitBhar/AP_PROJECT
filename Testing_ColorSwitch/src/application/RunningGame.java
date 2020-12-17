@@ -89,13 +89,13 @@ public class RunningGame implements Serializable{
 			this.score=state.score;
 			setScore();
 		}
+		this.bonusThreshold=5;
+		this.imageBonusImageView=createBonus();
 		s1=new subScene1("/application/Resources/YellowPanel2.png");
 		anchorPane.getChildren().add(s1);
 		s2=new subScene1("/application/Resources/YellowPanel2.png");
 		anchorPane.getChildren().add(s2);
 		moveBall();
-		this.bonusThreshold=5;
-		this.imageBonusImageView=createBonus();
 		
 	}
 	public void createObstacle()
