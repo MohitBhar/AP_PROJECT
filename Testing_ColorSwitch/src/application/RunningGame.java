@@ -2,19 +2,20 @@ package application;
 
 
 import java.io.Serializable;
-import java.time.Year;
 import java.util.ArrayList;
-import javafx.animation.Animation;
+
 import javafx.animation.AnimationTimer;
-import javafx.animation.FadeTransition;
-import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
 import javafx.animation.PathTransition;
-import javafx.animation.RotateTransition;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.effect.Bloom;
+import javafx.scene.effect.Glow;
+import javafx.scene.effect.Shadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -45,8 +46,12 @@ public class RunningGame implements Serializable{
 	public StopDueToHit stopDueToHit;
 	private subScene1 s1;
 	private subScene1 s2;
+	private int count;
 	private RunningGame runningGame=this;
 	protected Ball b1;
+	int bonusThreshold;
+	boolean checkForCollision=true;
+	ImageView imageBonusImageView;
 	protected ArrayList<ObstacleAbstract> obstacles=new ArrayList<ObstacleAbstract>();
 	protected ArrayList<star> stars=new ArrayList<star>();
 	protected ArrayList<ColorChanger> colorChangers=new ArrayList<ColorChanger>();
@@ -89,7 +94,8 @@ public class RunningGame implements Serializable{
 		s2=new subScene1("/application/Resources/YellowPanel2.png");
 		anchorPane.getChildren().add(s2);
 		moveBall();
-		
+		this.bonusThreshold=5;
+		this.imageBonusImageView=createBonus();
 		
 	}
 	public void createObstacle()
@@ -173,7 +179,15 @@ public class RunningGame implements Serializable{
 		anchorPane.getChildren().add(b1.createBall());
 		
 	}
-	
+	public ImageView createBonus()
+	{
+		ImageView iView=new ImageView("/application/Resources/Bonus Image.png");
+		this.anchorPane.getChildren().add(iView);
+		iView.setLayoutX(380);
+		iView.setLayoutY(-40);
+		return iView;
+		
+	}
 	public void createObstacle1()
 	{
 		
@@ -274,7 +288,37 @@ public class RunningGame implements Serializable{
 					else {
 						gravity1();
 					}
-					
+					if(imageBonusImageView.getBoundsInParent().intersects(b1.c1.getBoundsInParent()))
+					{
+						bonusGravity(0);
+						imageBonusImageView.setLayoutY(-40);
+						bonusThreshold=bonusThreshold+5;
+						count=0;
+						AnimationTimer animationTimer=new AnimationTimer() {
+							
+							@Override
+							public void handle(long arg0) {
+								// TODO Auto-generated method stub
+								b1.c1.setEffect(new Shadow());
+								count++;
+								checkForCollision=false;
+								if(count>800)
+								{
+									this.stop();
+									b1.c1.setEffect(null);
+									checkForCollision=true;
+								}
+							}
+						};
+						animationTimer.start();
+					}
+					if(score>bonusThreshold)
+					{
+						createBonus();
+						bonusGravity(2);
+						
+						
+					}
 					upKey();
 					for(ColorChanger x:colorChangers)
 					{
@@ -353,7 +397,10 @@ public class RunningGame implements Serializable{
 								}
 							}
 					}
+					
 					outScreen();
+					if(checkForCollision)
+					{
 					for(ObstacleAbstract o1:obstacles)
 					{
 						Arc test=o1.checkCollision(b1);
@@ -368,6 +415,7 @@ public class RunningGame implements Serializable{
 							}
 						}
 						
+					}
 					}
 										
 				if(b1.getYPosition()<350)
@@ -402,6 +450,10 @@ public class RunningGame implements Serializable{
 			animationTimer.stop();
 			firstPress=false;
 		}
+	}
+	public void bonusGravity(int n)
+	{
+		this.imageBonusImageView.setLayoutY(imageBonusImageView.getLayoutY()+n);
 	}
 	public void fun2()
 	{
