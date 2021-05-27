@@ -28,4 +28,5 @@ These buttons has respective functions as the name suggests
 
 ## Glimpse of the Game
 
+![Glimpse of the Game](Screenshot (65).png)
 
