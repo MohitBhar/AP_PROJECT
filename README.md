@@ -39,3 +39,15 @@ These buttons has respective functions as the name suggests
 ![Glimpse of the Game](img6.png?raw=true)
 
 ![Glimpse of the Game](img4.png?raw=true)
+
+## Some Bonus Components in the Game
+
+1 The invincible mode in infinite classic game in which collection of a golden ball results in making the ball invincible and allows it to pass through any obstacle without colliding for  a duration for few seconds and Increasing Difficulty as the game progresses due to gravity.
+
+2 The help section, credit section an Main Menu Screen. In the load Game screen, the remove all option which is used to delete all the saved games in a database.
+
+3 The Background Music in the game which can be muted on the main Screen as well as the In game Screen. 
+
+4 Obstacles greater than the minimum requirement and which were difficult to implement like the pendulum obstacle , the obstacle with 16 balls.
+
+
