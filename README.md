@@ -29,8 +29,13 @@ These buttons has respective functions as the name suggests
 ## Glimpse of the Game
 
 ![Glimpse of the Game](img1.png?raw=true)
+
 ![Glimpse of the Game](img2.png?raw=true)
+
 ![Glimpse of the Game](img3.png?raw=true)
+
 ![Glimpse of the Game](img5.png?raw=true)
+
 ![Glimpse of the Game](img6.png?raw=true)
+
 ![Glimpse of the Game](img4.png?raw=true)
